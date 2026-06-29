@@ -296,7 +296,7 @@ def gauge_chart(score: float, title: str = "Similarity Score") -> go.Figure:
     Gauge chart for a single cosine similarity value.
     """
     # Color zones
-    steps = [
+    gauge_steps = [
         dict(range=[0.00, 0.35], color="rgba(255,101,132,0.18)"),
         dict(range=[0.35, 0.55], color="rgba(255,154,60,0.18)"),
         dict(range=[0.55, 0.75], color="rgba(108,99,255,0.18)"),
@@ -318,7 +318,7 @@ def gauge_chart(score: float, title: str = "Similarity Score") -> go.Figure:
             bgcolor="rgba(255,255,255,0.03)",
             borderwidth=1,
             bordercolor=GRID_COLOR,
-            steps=steps,
+            steps=gauge_steps,
             threshold=dict(
                 line=dict(color="rgba(67,233,123,0.9)", width=3),
                 thickness=0.75,
@@ -330,9 +330,16 @@ def gauge_chart(score: float, title: str = "Similarity Score") -> go.Figure:
     ))
 
     fig.update_layout(
-        **LAYOUT_BASE,
+        paper_bgcolor=BG_COLOR,
+        plot_bgcolor=BG_COLOR,
+        font=dict(family=FONT_FAMILY, color=TEXT_COLOR, size=12),
         height=280,
         margin=dict(l=20, r=20, t=40, b=10),
+        hoverlabel=dict(
+            bgcolor="rgba(15,15,30,0.95)",
+            bordercolor="rgba(108,99,255,0.5)",
+            font=dict(family=FONT_FAMILY, color="#fff", size=12),
+        ),
     )
     return fig
 
